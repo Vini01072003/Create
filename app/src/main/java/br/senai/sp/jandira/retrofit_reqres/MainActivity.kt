@@ -28,6 +28,14 @@ class MainActivity : AppCompatActivity() {
             createUser()
         }
 
+        findViewById<Button>(R.id.btnPUT).setOnClickListener {
+            updateUser()
+        }
+        findViewById<Button>(R.id.btnDELETE).setOnClickListener {
+
+        }
+
+
     }
 
 //Recupera dados do usuário
@@ -66,6 +74,40 @@ class MainActivity : AppCompatActivity() {
             } else {
 
                 Log.e("CREATE-DATA", "${result.errorBody()}")
+
+            }
+
+        }
+
+
+    }
+private fun updateUser(){
+    lifecycleScope.launch(){
+        val body = JsonObject().apply {
+            addProperty("name", "Vinícius Alves dos Santos")
+            addProperty("job", "DEVOPS")
+            addProperty("", "")
+            addProperty("", "")
+
+
+    }
+        val result = apiServices.updateUser("2", body)
+        if (result.isSuccessful){
+            Log.e("UPDATE-DATA", "${result.body()}")
+        }else{
+            Log.e("UPDATE-DATA", "${result.message()}")
+        }
+
+    }
+}
+    private fun deleteuser(){
+        lifecycleScope.launch {
+            val result = apiServices.deleteUser("2")
+            if (result.isSuccessful){
+                Log.e("DELETE-DATA ","${result}")
+
+            }else{
+                Log.e("DLETE-DATA", "${result.message()}")
 
             }
         }

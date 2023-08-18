@@ -22,6 +22,7 @@ suspend fun updateUser(@Path("id") id: String, @Body body: JsonObject): Response
 
 @DELETE("/api/users/{id}")
 suspend fun deleteUser(@Path("id") id: String, @Body body: JsonObject): Response<JsonObject>
+    fun deleteUser(id: String): Response<JsonObject>
 
 
 }
